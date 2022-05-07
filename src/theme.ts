@@ -24,9 +24,6 @@ export const theme = extendTheme({
         width: '100vw',
         overflow: 'hidden',
       },
-      '.monaco-editor *': {
-        position: 'static',
-      },
     },
   },
   components: {
