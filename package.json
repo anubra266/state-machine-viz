@@ -33,7 +33,7 @@
     "xstate": "^4.26.0"
   },
   "scripts": {
-    "start": "concurrently \"npm:start:app\" \"npm:graphql:codegen\"",
+    "start": "next",
     "start:app": "next",
     "build": "graphql-codegen && next build",
     "serve": "next start",

@@ -8,6 +8,7 @@ import { simulationMachine } from '../components/simulationMachine';
 import { theme } from '../theme';
 import { useInterpretCanvas } from '../components/useInterpretCanvas';
 import Head from 'next/head';
+import { styles } from '../components/styles';
 
 function App() {
   // don't use `devTools: true` here as it would freeze your browser
@@ -27,21 +28,22 @@ function App() {
       )}
 
       <ChakraProvider theme={theme}>
-        <SimulationProvider value={simService}>
-          <Box
-            data-testid="app"
-            data-viz-theme="dark"
-            as="main"
-            display="grid"
-            gridTemplateColumns="1fr auto"
-            gridTemplateAreas="canvas panels"
-            height="100vh"
-          >
-            <CanvasProvider value={canvasService}>
-              <CanvasView />
-            </CanvasProvider>
-          </Box>
-        </SimulationProvider>
+        <Box sx={styles}>
+          <SimulationProvider value={simService}>
+            <Box
+              data-viz-theme="dark"
+              as="main"
+              display="grid"
+              gridTemplateColumns="1fr auto"
+              gridTemplateAreas="canvas panels"
+              height="100vh"
+            >
+              <CanvasProvider value={canvasService}>
+                <CanvasView />
+              </CanvasProvider>
+            </Box>
+          </SimulationProvider>
+        </Box>
       </ChakraProvider>
     </>
   );
