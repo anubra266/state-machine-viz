@@ -91,10 +91,6 @@ export const canZoomIn = (ctx: typeof initialContext) => {
   return ctx.zoom < MAX_ZOOM_IN_FACTOR;
 };
 
-export const canPan = (ctx: typeof initialContext) => {
-  return true;
-};
-
 const getCanvasCenterPoint = ({
   canvasPanelPosition,
 }: typeof initialContext): Point => ({
@@ -181,7 +177,6 @@ export const canvasMachine = canvasModel.createMachine({
           };
         },
       }),
-      cond: (ctx) => canPan(ctx),
       target: '.throttling',
       internal: false,
     },
