@@ -1,5 +1,5 @@
 import { createMachine, assign, ActorRefFrom, spawn, send } from 'xstate';
-import { notifMachine } from './notificationMachine';
+import { notifMachine } from './components/notificationMachine';
 
 interface Context {
   likesCount: number | undefined;

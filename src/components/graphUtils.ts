@@ -9,7 +9,6 @@ import type {
   ElkEdgeSection,
   ElkExtendedEdge,
   ElkNode,
-  LayoutOptions,
 } from 'elkjs/lib/main';
 import { Point } from './pathUtils';
 import { StateNode } from 'xstate';

@@ -6,7 +6,7 @@ import { CanvasView } from '../components/CanvasView';
 import { SimulationProvider } from '../components/SimulationContext';
 import { simulationMachine } from '../components/simulationMachine';
 import { theme } from '../theme';
-import { useInterpretCanvas } from '../useInterpretCanvas';
+import { useInterpretCanvas } from '../components/useInterpretCanvas';
 import Head from 'next/head';
 
 function App() {

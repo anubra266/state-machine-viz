@@ -1,4 +1,4 @@
-import { StateNodeViz } from './StateNodeViz';
+import { StateNodeViz } from './components/StateNodeViz';
 import { StateElkNode } from './components/graphUtils';
 
 export const GraphNode: React.FC<{ elkNode: StateElkNode }> = ({ elkNode }) => {

@@ -14,10 +14,9 @@ import {
 } from '@xstate/inspect';
 
 import { createModel } from 'xstate/lib/model';
-import { devTools } from '../devInterface';
-import { notifMachine } from '../notificationMachine';
+import { devTools } from './devInterface';
+import { notifMachine } from './notificationMachine';
 import { AnyState, AnyStateMachine, ServiceData } from './types';
-import { isOnClientSide } from '../isOnClientSide';
 
 export interface SimEvent extends SCXML.Event<any> {
   timestamp: number;
@@ -67,11 +66,6 @@ export const simulationMachine = simModel.createMachine(
     preserveActionOrder: true,
     context: simModel.initialContext,
     initial: 'visualizing',
-    // initial:
-    //   isOnClientSide() &&
-    //   new URLSearchParams(window.location.search).has('inspect')
-    //     ? 'inspecting'
-    //     : 'visualizing',
     entry: assign({ notifRef: () => spawn(notifMachine) }),
     invoke: {
       src: 'captureEventsFromChildServices',
