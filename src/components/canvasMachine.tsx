@@ -1,7 +1,7 @@
 import { send } from 'xstate';
 import { createModel } from 'xstate/lib/model';
 import { StateElkNode } from './graphUtils';
-import { EmbedContext, Point } from './types';
+import { Point } from './types';
 
 export enum ZoomFactor {
   slow = 1.09,
@@ -25,7 +25,6 @@ const initialPosition = {
 const initialContext = {
   ...initialPosition,
   elkGraph: undefined as StateElkNode | undefined,
-  embed: undefined as EmbedContext | undefined,
 };
 
 export interface Viewbox {
@@ -82,9 +81,7 @@ const MAX_ZOOM_OUT_FACTOR = 0.1;
 
 const MAX_ZOOM_IN_FACTOR = 2;
 
-export const canZoom = (embed?: EmbedContext) => {
-  return !embed?.isEmbedded || embed.zoom;
-};
+export const canZoom = () => true;
 
 export const canZoomOut = (ctx: typeof initialContext) => {
   return ctx.zoom > MAX_ZOOM_OUT_FACTOR;
@@ -95,7 +92,7 @@ export const canZoomIn = (ctx: typeof initialContext) => {
 };
 
 export const canPan = (ctx: typeof initialContext) => {
-  return !ctx.embed?.isEmbedded || (ctx.embed.isEmbedded && ctx.embed.pan);
+  return true;
 };
 
 const getCanvasCenterPoint = ({
@@ -160,7 +157,7 @@ export const canvasMachine = canvasModel.createMachine({
           zoomFactor: calculateZoomOutFactor(e.zoomFactor),
         });
       }),
-      cond: (ctx) => canZoom(ctx.embed) && canZoomOut(ctx),
+      cond: (ctx) => canZoom() && canZoomOut(ctx),
       target: '.throttling',
       internal: false,
     },
@@ -171,7 +168,7 @@ export const canvasMachine = canvasModel.createMachine({
           zoomFactor: e.zoomFactor || DEFAULT_ZOOM_IN_FACTOR,
         });
       }),
-      cond: (ctx) => canZoom(ctx.embed) && canZoomIn(ctx),
+      cond: (ctx) => canZoom() && canZoomIn(ctx),
       target: '.throttling',
       internal: false,
     },
