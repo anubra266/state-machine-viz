@@ -1,4 +1,4 @@
-# State machine visualizer Visualizer
+# State machine visualizer 
 
 Visualize [XState](https://xstate.js.org) state machines and statecharts.
 
