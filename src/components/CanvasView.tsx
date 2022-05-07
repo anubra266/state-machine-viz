@@ -3,6 +3,7 @@ import {
   MinusIcon,
   RepeatIcon,
   QuestionOutlineIcon,
+  HamburgerIcon,
 } from '@chakra-ui/icons';
 import {
   Box,
@@ -18,7 +19,7 @@ import {
 } from '@chakra-ui/react';
 import { useSelector } from '@xstate/react';
 import xstatePkgJson from 'xstate/package.json';
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { CanvasContainer } from './CanvasContainer';
 import { useCanvas } from './CanvasContext';
 import { canZoomIn, canZoomOut } from './canvasMachine';
@@ -27,11 +28,22 @@ import { Graph } from './Graph';
 import { useSimulation, useSimulationMode } from './SimulationContext';
 import { CompressIcon, HandIcon } from './Icons';
 import { createMachine } from 'xstate';
+import { defaultMach, secMach } from '../pages';
 
 export const CanvasView: React.FC = () => {
   const [panModeEnabled, setPanModeEnabled] = React.useState(false);
   const simService = useSimulation();
   const canvasService = useCanvas();
+
+  const [mach, setMach] = useState<any>(defaultMach);
+  const vizMachine = createMachine(mach);
+
+  useEffect(() => {
+    simService.send({
+      type: 'MACHINES.REGISTER',
+      machines: [vizMachine],
+    });
+  }, [mach]);
 
   const machine = useSelector(simService, (state) => {
     return state.context.currentSessionId
@@ -138,50 +150,17 @@ export const CanvasView: React.FC = () => {
               RESET
             </Button>
           )}
-          <Menu closeOnSelect={true} placement="top-end">
-            <MenuButton
-              as={IconButton}
-              size="sm"
-              isRound
-              aria-label="More info"
-              marginLeft="auto"
-              variant="secondary"
-              icon={
-                <QuestionOutlineIcon
-                  boxSize={6}
-                  css={{ '& circle': { display: 'none' } }}
-                />
-              }
-            />
-            <Portal>
-              <MenuList fontSize="sm" padding="0">
-                <MenuItem
-                  as={Link}
-                  href="https://github.com/statelyai/xstate-viz/issues/new?template=bug_report.md"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Report an issue
-                </MenuItem>
-                <MenuItem
-                  as={Link}
-                  href="https://github.com/statelyai/xstate"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {`XState version ${xstatePkgJson.version}`}
-                </MenuItem>
-                <MenuItem
-                  as={Link}
-                  href="https://stately.ai/privacy"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Privacy Policy
-                </MenuItem>
-              </MenuList>
-            </Portal>
-          </Menu>
+          <IconButton
+            size="sm"
+            onClick={() => {
+              setMach(secMach);
+            }}
+            isRound
+            aria-label="Edit Machine"
+            marginLeft="auto"
+            variant="secondary"
+            icon={<HamburgerIcon boxSize="4" />}
+          />
         </Box>
       )}
     </Box>

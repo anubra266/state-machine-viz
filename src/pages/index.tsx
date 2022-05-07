@@ -17,13 +17,6 @@ function App() {
 
   const canvasService = useInterpretCanvas();
 
-  useEffect(() => {
-    simService.send({
-      type: 'MACHINES.REGISTER',
-      machines: [machine],
-    });
-  }, []);
-
   return (
     <>
       {/* 
@@ -59,7 +52,7 @@ function App() {
 
 export default App;
 
-const machine = createMachine({
+export const defaultMach = {
   id: 'combobox',
   initial: 'unknown',
   exit: 'removeLiveRegion',
@@ -337,4 +330,29 @@ const machine = createMachine({
       },
     },
   },
-});
+};
+
+export const secMach = {
+  id: 'toggle-machine',
+  initial: 'unknown',
+  states: {
+    unknown: {
+      on: {
+        SETUP: {
+          target: 'unpressed',
+          actions: 'setupDocument',
+        },
+      },
+    },
+    pressed: {
+      on: {
+        CLICK: 'unpressed',
+      },
+    },
+    unpressed: {
+      on: {
+        CLICK: 'pressed',
+      },
+    },
+  },
+};
