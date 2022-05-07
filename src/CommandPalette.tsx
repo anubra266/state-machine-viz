@@ -14,7 +14,7 @@ import { useActor } from '@xstate/react';
 import React, { useLayoutEffect } from 'react';
 import { ReactNode } from 'react-markdown';
 import { usePalette } from './PaletteContext';
-import { getPlatformMetaKeyLabel } from './utils';
+import { getPlatformMetaKeyLabel } from './components/utils';
 
 // this hack is needed at the moment because Chakra assumes that Menus are always used in combination with MenuButtons
 // because of that logic related to auto-focusing menu items partially lives in the MenuButton and, in our case, it's just not executed here

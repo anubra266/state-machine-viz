@@ -1,8 +1,6 @@
 import { send } from 'xstate';
 import { createModel } from 'xstate/lib/model';
-import { ModelEventsFrom } from 'xstate/lib/model.types';
 import { StateElkNode } from './graphUtils';
-import { localCache } from './localCache';
 import { EmbedContext, Point } from './types';
 
 export enum ZoomFactor {
@@ -242,14 +240,6 @@ export const canvasMachine = canvasModel.createMachine({
       target: '.throttling',
       internal: false,
       actions: canvasModel.assign((context, event) => {
-        // TODO: This can be more elegant when we have system actor
-        if (!context.embed?.isEmbedded) {
-          const position = getPositionFromEvent(event);
-
-          if (!position) return {};
-
-          return position;
-        }
         return {};
       }),
     },
@@ -313,10 +303,3 @@ export const canvasMachine = canvasModel.createMachine({
     },
   },
 });
-
-const getPositionFromEvent = (event: ModelEventsFrom<typeof canvasModel>) => {
-  if (event.type !== 'SOURCE_CHANGED') return null;
-
-  const position = localCache.getPosition(event.id);
-  return position;
-};

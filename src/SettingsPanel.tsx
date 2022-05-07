@@ -13,8 +13,8 @@ import {
 } from '@chakra-ui/react';
 import { ThemeName, themes } from './editor-themes';
 import { useEditorTheme } from './themeContext';
-import { useSimulationMode } from './SimulationContext';
-import { getPlatformMetaKeyLabel } from './utils';
+import { useSimulationMode } from './components/SimulationContext';
+import { getPlatformMetaKeyLabel } from './components/utils';
 
 const KeyboardShortcuts = () => (
   <Box>

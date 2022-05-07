@@ -1,4 +1,4 @@
-import { EditorThemeDefinition } from '../types';
+import { EditorThemeDefinition } from '../components/types';
 
 const theme: EditorThemeDefinition = {
   base: 'vs-dark',

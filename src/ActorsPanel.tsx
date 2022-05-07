@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from '@xstate/react';
-import { useSimulation } from './SimulationContext';
+import { useSimulation } from './components/SimulationContext';
 import {
   Accordion,
   AccordionItem,

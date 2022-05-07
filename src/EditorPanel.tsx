@@ -15,20 +15,21 @@ import React from 'react';
 import { ActorRefFrom, assign, DoneInvokeEvent, send, spawn } from 'xstate';
 import { createModel } from 'xstate/lib/model';
 import { useAuth } from './authContext';
+import { machine2 } from './components/CanvasView';
 import { CommandPalette } from './CommandPalette';
 import { useEmbed } from './embedContext';
-import { ForkIcon, MagicIcon, SaveIcon } from './Icons';
+import { ForkIcon, MagicIcon, SaveIcon } from './components/Icons';
 import { notifMachine } from './notificationMachine';
 import { parseMachines } from './parseMachine';
-import { useSimulationMode } from './SimulationContext';
+import { useSimulationMode } from './components/SimulationContext';
 import {
   getEditorValue,
   getShouldImmediateUpdate,
   SourceMachineActorRef,
   SourceMachineState,
 } from './sourceMachine';
-import type { AnyStateMachine } from './types';
-import { getPlatformMetaKeyLabel, uniq } from './utils';
+import type { AnyStateMachine } from './components/types';
+import { getPlatformMetaKeyLabel, uniq } from './components/utils';
 
 function buildGistFixupImportsText(usedXStateGistIdentifiers: string[]) {
   const rootNames: string[] = [];
@@ -186,39 +187,7 @@ const editorPanelMachine = editorPanelModel.createMachine(
         tags: ['visualizing'],
         invoke: {
           src: async (ctx) => {
-            const monaco = ctx.monacoRef!;
-            const uri = monaco.Uri.parse(ctx.mainFile);
-            const tsWoker = await monaco.languages.typescript
-              .getTypeScriptWorker()
-              .then((worker) => worker(uri));
-
-            const syntaxErrors = await tsWoker.getSyntacticDiagnostics(
-              uri.toString(),
-            );
-
-            if (syntaxErrors.length > 0) {
-              const model = ctx.monacoRef?.editor.getModel(uri);
-              // Only report one error at a time
-              const error = syntaxErrors[0];
-
-              const start = model?.getPositionAt(error.start!);
-              const end = model?.getPositionAt(error.start! + error.length!);
-              const errorRange = new ctx.monacoRef!.Range(
-                start?.lineNumber!,
-                0, // beginning of the line where error occured
-                end?.lineNumber!,
-                end?.column!,
-              );
-              return Promise.reject(
-                new SyntaxError(error.messageText.toString(), errorRange),
-              );
-            }
-
-            const compiledSource = await tsWoker
-              .getEmitOutput(uri.toString())
-              .then((result) => result.outputFiles[0].text);
-
-            return parseMachines(compiledSource);
+            return [machine2];
           },
           onDone: {
             target: 'updating',

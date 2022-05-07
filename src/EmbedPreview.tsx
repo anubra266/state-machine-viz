@@ -18,8 +18,8 @@ import {
 import { useMachine } from '@xstate/react';
 import React, { useEffect, useRef, useState } from 'react';
 import { createModel } from 'xstate/lib/model';
-import { EmbedMode, EmbedPanel, ParsedEmbed } from './types';
-import { DEFAULT_EMBED_PARAMS, makeEmbedUrl, paramsToRecord } from './utils';
+import { EmbedMode, EmbedPanel, ParsedEmbed } from './components/types';
+import { DEFAULT_EMBED_PARAMS, makeEmbedUrl, paramsToRecord } from './components/utils';
 import { send, assign, ContextFrom } from 'xstate';
 import { Overlay } from './Overlay';
 import { useRouter } from 'next/router';

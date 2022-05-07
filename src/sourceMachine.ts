@@ -30,8 +30,8 @@ import {
 } from './graphql/UpdateSourceFile.generated';
 import { localCache } from './localCache';
 import { notifMachine, notifModel } from './notificationMachine';
-import { gQuery, updateQueryParamsWithoutReload } from './utils';
-import { SourceProvider, SourceRegistryData } from './types';
+import { gQuery, updateQueryParamsWithoutReload } from './components/utils';
+import { SourceProvider, SourceRegistryData } from './components/types';
 import { ForkSourceFileDocument } from './graphql/ForkSourceFile.generated';
 import { isOnClientSide } from './isOnClientSide';
 import { useAuth } from './authContext';

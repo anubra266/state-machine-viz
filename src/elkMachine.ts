@@ -1,7 +1,7 @@
 import { assign, DoneInvokeEvent } from 'xstate';
 import { createModel } from 'xstate/lib/model';
-import { DirectedGraphNode } from './directedGraph';
-import { getElkGraph, StateElkNode } from './graphUtils';
+import { DirectedGraphNode } from './components/directedGraph';
+import { getElkGraph, StateElkNode } from './components/graphUtils';
 
 export const createElkMachine = (digraph: DirectedGraphNode) => {
   const elkModel = createModel(

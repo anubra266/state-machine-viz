@@ -12,7 +12,7 @@ import {
   SpecialTargets,
   StopAction,
 } from 'xstate';
-import { isDelayedTransitionAction, isStringifiedFunction } from './utils';
+import { isDelayedTransitionAction, isStringifiedFunction } from './components/utils';
 
 type AnyFunction = (...args: any[]) => any;
 

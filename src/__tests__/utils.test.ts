@@ -1,5 +1,5 @@
-import { EmbedMode, EmbedPanel } from '../types';
-import * as utils from '../utils';
+import { EmbedMode, EmbedPanel } from '../components/types';
+import * as utils from '../components/utils';
 
 describe('utils', () => {
   describe('makeEmbedUrl', () => {

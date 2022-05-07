@@ -4,7 +4,7 @@ import type {
   State,
   StateMachine,
 } from 'xstate';
-import { SourceFileFragment } from './graphql/SourceFileFragment.generated';
+import { SourceFileFragment } from '../graphql/SourceFileFragment.generated';
 import { Model } from 'xstate/lib/model.types';
 import type { editor } from 'monaco-editor';
 

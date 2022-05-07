@@ -15,7 +15,7 @@ import {
 import { useMachine } from '@xstate/react';
 import { featureFlags } from './featureFlags';
 import { EmbedPreview } from './EmbedPreview';
-import { TwitterIcon, EmbedIcon } from './Icons';
+import { TwitterIcon, EmbedIcon } from './components/Icons';
 import { registryLinks } from './registryLinks';
 import { shareMachine } from './shareMachine';
 

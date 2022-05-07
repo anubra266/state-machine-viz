@@ -35,9 +35,9 @@ import { assign, SCXML, send, StateFrom } from 'xstate';
 import { createModel } from 'xstate/lib/model';
 import { toSCXMLEvent } from 'xstate/lib/utils';
 import { JSONView } from './JSONView';
-import { useSimulation } from './SimulationContext';
+import { useSimulation } from './components/SimulationContext';
 import { SimEvent, simulationMachine } from './simulationMachine';
-import { isInternalEvent, isNullEvent } from './utils';
+import { isInternalEvent, isNullEvent } from './components/utils';
 
 const EventConnection: React.FC<{ event: SimEvent }> = ({ event }) => {
   const sim = useSimulation();

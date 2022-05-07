@@ -11,7 +11,6 @@ import {
   isTextInputLikeElement,
   isWithPlatformMetaKey,
 } from './utils';
-import { useEmbed } from './embedContext';
 import {
   dragSessionModel,
   dragSessionTracker,
@@ -277,7 +276,6 @@ export const CanvasContainer: React.FC<{ panModeEnabled: boolean }> = ({
   panModeEnabled,
 }) => {
   const canvasService = useCanvas();
-  const embed = useEmbed();
   const canvasRef = useRef<HTMLDivElement>(null!);
   const [state, send] = useMachine(dragMachine, {
     actions: {
@@ -291,7 +289,7 @@ export const CanvasContainer: React.FC<{ panModeEnabled: boolean }> = ({
       ),
     },
     guards: {
-      isPanDisabled: () => !!embed?.isEmbedded && !embed.pan,
+      isPanDisabled: () => false,
     },
     context: {
       ...dragModel.initialContext,
@@ -422,8 +420,8 @@ export const CanvasContainer: React.FC<{ panModeEnabled: boolean }> = ({
    */
   useEffect(() => {
     const onCanvasWheel = (e: WheelEvent) => {
-      const isZoomEnabled = !embed?.isEmbedded || embed.zoom;
-      const isPanEnabled = !embed?.isEmbedded || embed.pan;
+      const isZoomEnabled = true;
+      const isPanEnabled = true;
 
       if (isZoomEnabled && isWithPlatformMetaKey(e)) {
         e.preventDefault();
@@ -453,7 +451,7 @@ export const CanvasContainer: React.FC<{ panModeEnabled: boolean }> = ({
     return () => {
       canvasEl.removeEventListener('wheel', onCanvasWheel);
     };
-  }, [canvasService, embed]);
+  }, [canvasService]);
 
   return (
     <div

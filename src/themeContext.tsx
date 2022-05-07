@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { ThemeName } from './editor-themes';
 import { localCache } from './localCache';
-import { createRequiredContext } from './utils';
+import { createRequiredContext } from './components/utils';
 
 const [EditorThemeProviderLocal, useEditorTheme] = createRequiredContext<{
   theme: ThemeName;

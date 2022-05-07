@@ -5,10 +5,10 @@ import { useAuth } from './authContext';
 import { getSupabaseClient } from './authMachine';
 import { AddLikeDocument } from './graphql/AddLike.generated';
 import { RemoveLikeDocument } from './graphql/RemoveLike.generated';
-import { HeartIcon, HeartOutlinedIcon } from './Icons';
+import { HeartIcon, HeartOutlinedIcon } from './components/Icons';
 import { likesMachine } from './likesMachine';
 import { useSourceActor } from './sourceMachine';
-import { gQuery } from './utils';
+import { gQuery } from './components/utils';
 
 export const LikeButton = () => {
   const authService = useAuth();

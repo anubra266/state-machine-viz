@@ -1,11 +1,11 @@
 import { useSelector } from '@xstate/react';
 import React, { useMemo } from 'react';
 import type { AnyStateNodeDefinition, Guard } from 'xstate';
-import { DirectedGraphEdge } from './directedGraph';
+import { DirectedGraphEdge } from './components/directedGraph';
 import { EventTypeViz, toDelayString } from './EventTypeViz';
-import { Point } from './pathUtils';
-import { useSimulation } from './SimulationContext';
-import { AnyStateMachine, StateFrom } from './types';
+import { Point } from './components/pathUtils';
+import { useSimulation } from './components/SimulationContext';
+import { AnyStateMachine, StateFrom } from './components/types';
 import { toSCXMLEvent } from 'xstate/lib/utils';
 import { simulationMachine } from './simulationMachine';
 import { ActionViz } from './ActionViz';

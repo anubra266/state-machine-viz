@@ -7,8 +7,8 @@ import {
   dragSessionModel,
   dragSessionTracker,
   PointDelta,
-} from './dragSessionTracker';
-import { Point } from './types';
+} from './components/dragSessionTracker';
+import { Point } from './components/types';
 
 const resizableModel = createModel(
   {

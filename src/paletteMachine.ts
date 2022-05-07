@@ -1,5 +1,5 @@
 import { createModel } from 'xstate/lib/model';
-import { isWithPlatformMetaKey, isTextInputLikeElement } from './utils';
+import { isWithPlatformMetaKey, isTextInputLikeElement } from './components/utils';
 
 const paletteModel = createModel(undefined, {
   events: {

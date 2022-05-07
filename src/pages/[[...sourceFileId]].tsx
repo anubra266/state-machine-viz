@@ -1,62 +1,50 @@
-import App from '../App';
-import { GetServerSideProps } from 'next';
-import { gQuery } from '../utils';
-import { GetSourceFileDocument } from '../graphql/GetSourceFile.generated';
-import { SourceRegistryData } from '../types';
+import { Box, ChakraProvider } from '@chakra-ui/react';
+import React from 'react';
+import { useInterpret } from '@xstate/react';
+import { CanvasProvider } from '../components/CanvasContext';
+import { CanvasView } from '../components/CanvasView';
+import { SimulationProvider } from '../components/SimulationContext';
+import { simulationMachine } from '../components/simulationMachine';
+import { theme } from '../theme';
+import { useInterpretCanvas } from '../useInterpretCanvas';
+import Head from 'next/head';
 
-export interface SourceFileIdPageProps {
-  sourceRegistryData: SourceRegistryData | null;
+function App() {
+  // don't use `devTools: true` here as it would freeze your browser
+  const simService = useInterpret(simulationMachine);
+
+  const canvasService = useInterpretCanvas();
+
+  return (
+    <>
+      {/* 
+      //? Import bundled Elk if we're on server side 
+      */}
+      {typeof window !== undefined && (
+        <Head>
+          <script src="https://unpkg.com/elkjs@0.7.1/lib/elk.bundled.js"></script>
+        </Head>
+      )}
+
+      <ChakraProvider theme={theme}>
+        <SimulationProvider value={simService}>
+          <Box
+            data-testid="app"
+            data-viz-theme="dark"
+            as="main"
+            display="grid"
+            gridTemplateColumns="1fr auto"
+            gridTemplateAreas="canvas panels"
+            height="100vh"
+          >
+            <CanvasProvider value={canvasService}>
+              <CanvasView />
+            </CanvasProvider>
+          </Box>
+        </SimulationProvider>
+      </ChakraProvider>
+    </>
+  );
 }
-
-export const getServerSideProps: GetServerSideProps<
-  SourceFileIdPageProps,
-  { sourceFileId?: string[] }
-> = async (ctx) => {
-  // dynamic pages always have `req.params` available
-  const sourceFileIdParam = ctx.params!.sourceFileId;
-
-  if (!sourceFileIdParam) {
-    return {
-      props: {
-        sourceRegistryData: null,
-      },
-    };
-  }
-
-  const [sourceFileId] = sourceFileIdParam;
-
-  if (ctx.query.ssr) {
-    const sourceFile = JSON.parse(ctx.query.ssr as string).data;
-    return {
-      props: {
-        sourceRegistryData: {
-          ...sourceFile,
-          dataSource: 'ssr',
-        },
-      },
-    };
-  }
-
-  const sourceFileResult = await gQuery(GetSourceFileDocument, {
-    id: sourceFileId,
-  });
-
-  const sourceFile = sourceFileResult.data?.getSourceFile ?? null;
-
-  if (!sourceFile) {
-    return {
-      notFound: true,
-    };
-  }
-
-  return {
-    props: {
-      sourceRegistryData: {
-        ...sourceFile,
-        dataSource: 'ssr',
-      },
-    },
-  };
-};
 
 export default App;

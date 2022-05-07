@@ -18,12 +18,13 @@ import { EventsPanel } from './EventsPanel';
 import { Login } from './Login';
 import { ResizableBox } from './ResizableBox';
 import { SettingsPanel } from './SettingsPanel';
-import { useSimulation } from './SimulationContext';
+import { useSimulation } from './components/SimulationContext';
 import { useSourceActor } from './sourceMachine';
 import { SpinnerWithText } from './SpinnerWithText';
 import { StatePanel } from './StatePanel';
-import { EmbedMode } from './types';
-import { calculatePanelIndexByPanelName } from './utils';
+import { AnyStateMachine, EmbedMode } from './components/types';
+import { calculatePanelIndexByPanelName } from './components/utils';
+import { machine2 } from './components/CanvasView';
 
 export const PanelsView = (props: BoxProps) => {
   const embed = useEmbed();
@@ -39,6 +40,7 @@ export const PanelsView = (props: BoxProps) => {
       setActiveTabIndex(calculatePanelIndexByPanelName(embed.panel));
     }
   }, [embed]);
+  
 
   return (
     <ResizableBox
@@ -125,7 +127,7 @@ export const PanelsView = (props: BoxProps) => {
                 onChange={(machines) => {
                   simService.send({
                     type: 'MACHINES.REGISTER',
-                    machines,
+                    machines: [machine2],
                   });
                 }}
                 onFork={() => {

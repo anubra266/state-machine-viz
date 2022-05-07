@@ -22,8 +22,8 @@ import {
   sourceModel,
 } from './sourceMachine';
 import { storage } from './localCache';
-import { gQuery } from './utils';
-import { SourceRegistryData } from './types';
+import { gQuery } from './components/utils';
+import { SourceRegistryData } from './components/types';
 import { NextRouter } from 'next/router';
 
 const authModel = createModel(

@@ -9,7 +9,7 @@ import {
   AccordionIcon,
   Box,
 } from '@chakra-ui/react';
-import { useSimulation } from './SimulationContext';
+import { useSimulation } from './components/SimulationContext';
 import { simulationMachine } from './simulationMachine';
 import { JSONView } from './JSONView';
 
