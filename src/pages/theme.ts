@@ -15,6 +15,7 @@ export const theme = extendTheme({
         position: 'relative',
       },
       body: {
+        bg: '#111',
         overflow: 'hidden',
         overscrollBehavior: 'none',
         fontFamily: `-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif`,
