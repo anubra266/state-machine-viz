@@ -33,7 +33,7 @@ export const parseMachine = (source: string) => {
     (machineFactory: any) =>
     (...args: any[]) => {
       const machine = machineFactory(...args);
-      machines.push(...args);
+      machines.push(machine);
       return machine;
     };
 

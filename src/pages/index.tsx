@@ -10,7 +10,7 @@ function App() {
 
   const [machine, setMachine] = useState<any>(defaultMachine);
 
-  return <MachineVisualizer machineConfig={machine} />;
+  return <MachineVisualizer machine={machine} />;
 }
 
 export default App;

@@ -9,26 +9,20 @@ import { theme } from './theme';
 import { useInterpretCanvas } from '../components/useInterpretCanvas';
 import Head from 'next/head';
 import { styles } from '../components/styles';
-import { createMachine } from 'xstate';
+import { createMachine, StateNode } from 'xstate';
 
-export const MachineVisualizer = ({
-  machineConfig,
-}: {
-  machineConfig: Record<string, any>;
-}) => {
+export const MachineVisualizer = ({ machine }: { machine: StateNode }) => {
   // don't use `devTools: true` here as it would freeze your browser
   const simService = useInterpret(simulationMachine);
 
   const canvasService = useInterpretCanvas();
-
-  const machine = createMachine(machineConfig);
 
   useEffect(() => {
     simService.send({
       type: 'MACHINES.REGISTER',
       machines: [machine],
     });
-  }, [machineConfig]);
+  }, [machine]);
 
   return (
     <>
