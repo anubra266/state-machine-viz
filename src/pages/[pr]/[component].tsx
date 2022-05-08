@@ -1,7 +1,7 @@
 import React from 'react';
-import { MachineVisualizer } from '../components/MachineVisualizer';
+import { MachineVisualizer } from '../../components/MachineVisualizer';
 import { actions, createMachine } from 'xstate';
-import { parseMachine } from '../components/parseMachine';
+import { parseMachine } from '../../components/parseMachine';
 import { GetServerSideProps } from 'next';
 const { Octokit } = require('@octokit/core');
 
@@ -19,7 +19,7 @@ export default App;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const prNumber = context.params?.pr;
-  const MACHINE_OUTPUT_FILE = 'output.js';
+  const componentName = `${context.params?.component}.js`;
   const octokit = new Octokit({ auth: process.env.GITHUB_ACCESS_TOKEN });
 
   async function getData() {
@@ -34,8 +34,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       );
       const prFiles = response.data as Record<string, any>[];
 
-      const outputFile = prFiles.find(
-        (file) => file.filename === MACHINE_OUTPUT_FILE,
+      const outputFile = prFiles.find((file) =>
+        file.filename.endsWith(componentName),
       );
 
       const fileContentURI = outputFile?.raw_url;
@@ -55,7 +55,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   } else {
     status = {
       successful: false,
-      message: { id: `Pull request ${prNumber} not found` },
+      message: { id: 'machine not found 😔' },
     };
   }
 
