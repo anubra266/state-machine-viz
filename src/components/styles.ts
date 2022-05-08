@@ -386,6 +386,15 @@ const transitionVizStyles: CSSObject = {
     '&:after': {
       content: "']'",
     },
+    '.operator, .bracket': {
+      fontFamily: 'monospace',
+    },
+    '.operator': {
+      color: 'blue.200',
+    },
+    '.bracket': {
+      color: 'orange.200',
+    },
   },
 
   "[data-viz='transition-actions']": {

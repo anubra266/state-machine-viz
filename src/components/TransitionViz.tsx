@@ -12,7 +12,14 @@ import { ActionViz } from './ActionViz';
 import { DelayViz } from './DelayViz';
 
 const getGuardType = (guard: Guard<any, any>) => {
-  return guard.name; // v4
+  const guardName = guard.name.replace(
+    /&&|\|\||\.|\(|\)/g,
+    (m: string) =>
+      `<span class="${
+        ['(', ')'].includes(m) ? 'bracket' : 'operator'
+      }">${m}</span>`,
+  );
+  return guardName; // v4
 };
 
 export type DelayedTransitionMetadata =
@@ -151,9 +158,10 @@ export const TransitionViz: React.FC<{
           )}
         </span>
         {definition.cond && (
-          <span data-viz="transition-guard">
-            {getGuardType(definition.cond)}
-          </span>
+          <span
+            data-viz="transition-guard"
+            dangerouslySetInnerHTML={{ __html: getGuardType(definition.cond) }}
+          />
         )}
       </div>
       <div data-viz="transition-content">

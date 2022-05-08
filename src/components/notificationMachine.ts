@@ -41,7 +41,7 @@ export const notifMachine = notifModel.createMachine({
               status: 'info',
               title: 'Visualizer events',
               description:
-                "Those dont't work for now, we're just aiming to show an overral picture of the machine.",
+                "Those dont't work for now, we're just aiming to show an overall picture of the machine.",
               isClosable: true,
               position: 'top-left',
             });
