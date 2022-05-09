@@ -43,18 +43,28 @@ export const Index = (props: NextPage & IndexProps) => {
   const prLink = `https://github.com/chakra-ui/zag/pull/${prNumber}`;
 
   if (!machineFiles) return 'Pull Request not found';
+  console.log('machineFiles :>> ', machineFiles);
 
   return (
     <Stack py="10" px="20" overflow="auto" maxH="100vh">
-      <div>
+      {machineFiles.length === 0 ? (
         <Text fontSize="2xl" fontWeight="medium">
-          Updated machines for{' '}
-          <Link href={prLink} target="_blank" color="blue.400">
+          No machine changes found for{' '}
+          <Link href={prLink} color="blue.400">
             PR {prNumber}
           </Link>
         </Text>
-        <Divider />
-      </div>
+      ) : (
+        <div>
+          <Text fontSize="2xl" fontWeight="medium">
+            Updated machines for{' '}
+            <Link href={prLink} target="_blank" color="blue.400">
+              PR {prNumber}
+            </Link>
+          </Text>
+          <Divider />
+        </div>
+      )}
       <SimpleGrid minChildWidth="250px" spacing="6" pt="8">
         {machineFiles.map((machine) => (
           <chakra.div position="relative" key={machine.filename}>
