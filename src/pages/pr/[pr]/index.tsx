@@ -106,7 +106,7 @@ export const Index = (props: NextPage & IndexProps) => {
                       variant="solid"
                       colorScheme="purple"
                       as={Link}
-                      href={`/${prNumber}/${machine.filename}`}
+                      href={`/pr/${prNumber}/${machine.filename}`}
                       icon={<SiDgraph />}
                       aria-label="Visualize"
                     />
