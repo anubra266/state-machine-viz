@@ -44,7 +44,11 @@ export const Index = (props: NextPage & IndexProps) => {
       </div>
       <SimpleGrid minChildWidth="250px" spacing="6" pt="8">
         {machines.map((machine) => (
-          <chakra.div position="relative" key={machine.name}>
+          <Link
+            href={`/${machine.name}`}
+            position="relative"
+            key={machine.name}
+          >
             <Flex
               rounded="md"
               border="solid 1px"
@@ -52,40 +56,33 @@ export const Index = (props: NextPage & IndexProps) => {
               p="3"
               direction="column"
               gap="12"
+              transition="all .2s ease"
+              _hover={{
+                borderColor: 'whiteAlpha.300',
+                shadow: '-4px -3px 45px 21px rgba(0,0,0,0.35)',
+              }}
             >
               <Flex align="center" w="full">
-                <Text textTransform="capitalize" fontWeight="medium">
+                <Text
+                  textTransform="capitalize"
+                  fontWeight="medium"
+                  textDecoration="none"
+                >
                   {machine.name}
                 </Text>
-                <ButtonGroup size="xs" ml="auto" variant="ghost" spacing="1">
-                  <IconButton
-                    as={Link}
-                    target="_blank"
-                    href={machine.git_url}
-                    icon={<FaGithub />}
-                    aria-label="Open in github"
-                  />
-                  <Tooltip
-                    hasArrow
-                    label={`Visualize ${machine.name
-                      .split('-')
-                      .join(' ')} machine`}
-                    bg="whiteAlpha.100"
-                    color="white"
-                  >
-                    <IconButton
-                      variant="solid"
-                      colorScheme="purple"
-                      as={Link}
-                      href={`/${machine.name}`}
-                      icon={<SiDgraph />}
-                      aria-label="Visualize"
-                    />
-                  </Tooltip>
-                </ButtonGroup>
+                <IconButton
+                  as={Link}
+                  variant="ghost"
+                  size="xs"
+                  ml="auto"
+                  target="_blank"
+                  href={machine.git_url}
+                  icon={<FaGithub />}
+                  aria-label="Open in github"
+                />
               </Flex>
             </Flex>
-          </chakra.div>
+          </Link>
         ))}
       </SimpleGrid>
     </Stack>
