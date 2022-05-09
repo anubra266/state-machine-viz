@@ -1,5 +1,4 @@
 import {
-  Box,
   Divider,
   Flex,
   Link,
@@ -12,7 +11,6 @@ import {
   StatHelpText,
   StatArrow,
   Stat,
-  LinkBox,
   Tooltip,
 } from '@chakra-ui/react';
 import { pick } from '@chakra-ui/utils';
@@ -30,6 +28,7 @@ type IndexProps = {
     | {
         additions: any;
         filename: any;
+        git_url?: string;
         blob_url: any;
         changes: any;
         deletions: any;
@@ -79,13 +78,22 @@ export const Index = (props: NextPage & IndexProps) => {
                   {machine.filename.split('-').join(' ')}
                 </Text>
                 <ButtonGroup size="xs" ml="auto" variant="ghost" spacing="1">
-                  <IconButton
-                    as={Link}
-                    target="_blank"
-                    href={machine.blob_url}
-                    icon={<FaGithub />}
-                    aria-label="Open in github"
-                  />
+                  <Tooltip
+                    hasArrow
+                    label={`Open ${machine.filename
+                      .split('-')
+                      .join(' ')} in Github`}
+                    bg="whiteAlpha.100"
+                    color="white"
+                  >
+                    <IconButton
+                      as={Link}
+                      target="_blank"
+                      href={machine.git_url || machine.blob_url}
+                      icon={<FaGithub />}
+                      aria-label="Open in github"
+                    />
+                  </Tooltip>
                   <Tooltip
                     hasArrow
                     label={`Visualize ${machine.filename
@@ -179,9 +187,16 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
             'filename',
             'status',
           ]);
+          const compName = comp.filename.split('/')[1].split('.')[0];
+          const machineFile = prFiles.find(
+            (fi) =>
+              fi.filename ===
+              `packages/machines/${compName}/src/${compName}.machine.ts`,
+          );
           return {
             ...comp,
-            filename: comp.filename.split('/')[1].split('.')[0],
+            filename: compName,
+            git_url: machineFile?.blob_url,
           };
         });
       return machineOutputs;

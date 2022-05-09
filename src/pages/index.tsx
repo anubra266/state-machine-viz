@@ -70,16 +70,23 @@ export const Index = (props: NextPage & IndexProps) => {
                 >
                   {machine.name}
                 </Text>
-                <IconButton
-                  as={Link}
-                  variant="ghost"
-                  size="xs"
-                  ml="auto"
-                  target="_blank"
-                  href={machine.git_url}
-                  icon={<FaGithub />}
-                  aria-label="Open in github"
-                />
+                <Tooltip
+                  hasArrow
+                  label={`Open ${machine.name} in Github`}
+                  bg="whiteAlpha.100"
+                  color="white"
+                >
+                  <IconButton
+                    as={Link}
+                    variant="ghost"
+                    size="xs"
+                    ml="auto"
+                    target="_blank"
+                    href={machine.git_url}
+                    icon={<FaGithub />}
+                    aria-label="Open in github"
+                  />
+                </Tooltip>
               </Flex>
             </Flex>
           </Link>
