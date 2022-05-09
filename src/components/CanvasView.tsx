@@ -2,7 +2,6 @@ import {
   AddIcon,
   MinusIcon,
   RepeatIcon,
-  HamburgerIcon,
   ArrowBackIcon,
 } from '@chakra-ui/icons';
 import { Box, Button, ButtonGroup, IconButton } from '@chakra-ui/react';
