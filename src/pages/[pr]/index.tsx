@@ -43,7 +43,6 @@ export const Index = (props: NextPage & IndexProps) => {
   const prLink = `https://github.com/chakra-ui/zag/pull/${prNumber}`;
 
   if (!machineFiles) return 'Pull Request not found';
-  console.log('machineFiles :>> ', machineFiles);
 
   return (
     <Stack py="10" px="20" overflow="auto" maxH="100vh">
