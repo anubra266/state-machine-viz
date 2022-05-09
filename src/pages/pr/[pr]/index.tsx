@@ -20,7 +20,6 @@ import { GetServerSideProps, NextPage } from 'next';
 import React from 'react';
 import { FaGithub } from 'react-icons/fa';
 import { SiDgraph } from 'react-icons/si';
-import NextLink from 'next/link';
 
 const { Octokit } = require('@octokit/core');
 

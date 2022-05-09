@@ -1,16 +1,12 @@
 import React from 'react';
 import { MachineVisualizer } from '../../../components/MachineVisualizer';
-import { actions, createMachine } from 'xstate';
 import { parseMachine } from '../../../components/parseMachine';
 import { GetServerSideProps } from 'next';
+import { visualizeMessage } from '../../../components/utils';
 const { Octokit } = require('@octokit/core');
 
 function App(props: { machineSource: string; status: Record<string, any> }) {
-  let machine;
-
-  if (!props.status.successful) {
-    machine = createMachine(props.status.message);
-  } else machine = parseMachine(props.machineSource);
+  const machine = parseMachine(props.machineSource);
 
   return <MachineVisualizer machine={machine} />;
 }
@@ -47,19 +43,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   const fileContent = await getData();
-  let status;
-  if (fileContent) {
-    status = {
-      successful: true,
-    };
-  } else {
-    status = {
-      successful: false,
-      message: { id: 'machine not found 😔' },
-    };
-  }
+  const machineSource = fileContent || visualizeMessage('Machine not found 😔');
 
   return {
-    props: { machineSource: fileContent, status },
+    props: { machineSource },
   };
 };

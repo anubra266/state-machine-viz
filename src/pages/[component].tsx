@@ -25,7 +25,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const invalidComponent = fileContent === '404: Not Found';
 
   const machineSource = invalidComponent
-    ? visualizeMessage('Machine not found')
+    ? visualizeMessage('Machine not found 😔')
     : fileContent;
 
   return {
