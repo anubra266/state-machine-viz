@@ -45,7 +45,7 @@ export const Index = (props: NextPage & IndexProps) => {
   if (!machineFiles) return 'Pull Request not found';
 
   return (
-    <Stack py="10" px="20">
+    <Stack py="10" px="20" overflow="auto" maxH="100vh">
       <div>
         <Text fontSize="2xl" fontWeight="medium">
           Updated machines for{' '}
@@ -63,11 +63,6 @@ export const Index = (props: NextPage & IndexProps) => {
               border="solid 1px"
               borderColor="whiteAlpha.200"
               p="3"
-              //   transition="border-color .2s ease"
-              //   cursor="pointer"
-              //   _hover={{
-              //     borderColor: 'whiteAlpha.300',
-              //   }}
               direction="column"
               gap="12"
             >

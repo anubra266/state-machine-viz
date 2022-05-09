@@ -3,6 +3,7 @@ import {
   MinusIcon,
   RepeatIcon,
   HamburgerIcon,
+  ArrowBackIcon,
 } from '@chakra-ui/icons';
 import { Box, Button, ButtonGroup, IconButton } from '@chakra-ui/react';
 import { useSelector } from '@xstate/react';
@@ -113,15 +114,15 @@ export const CanvasView: React.FC = () => {
             RESET
           </Button>
         )} */}
-        {/* <IconButton
+        <IconButton
           size="sm"
-           
           isRound
           aria-label="Edit Machine"
           marginLeft="auto"
           variant="secondary"
-          icon={<HamburgerIcon boxSize="4" />}
-        /> */}
+          icon={<ArrowBackIcon boxSize="4" />}
+          onClick={() => history.back()}
+        />
       </Box>
     </Box>
   );
