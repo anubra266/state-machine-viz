@@ -1,25 +1,16 @@
 import {
-  Box,
   Divider,
   Flex,
   Link,
   SimpleGrid,
   Stack,
   Text,
-  chakra,
   IconButton,
-  ButtonGroup,
-  StatHelpText,
-  StatArrow,
-  Stat,
-  LinkBox,
   Tooltip,
 } from '@chakra-ui/react';
-import { pick } from '@chakra-ui/utils';
 import { GetServerSideProps, NextPage } from 'next';
 import React from 'react';
 import { FaGithub } from 'react-icons/fa';
-import { SiDgraph } from 'react-icons/si';
 
 const { Octokit } = require('@octokit/core');
 

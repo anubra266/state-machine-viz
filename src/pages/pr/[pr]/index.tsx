@@ -175,7 +175,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         },
       );
       const prFiles = response.data as Record<string, any>[];
-      console.log('prFiles :>> ', prFiles);
       const machineOutputs = prFiles
         .filter((file) => file.filename.startsWith('.xstate/'))
         .map((machine) => {
