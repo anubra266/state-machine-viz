@@ -1,7 +1,7 @@
 import React from 'react';
-import { MachineVisualizer } from '../../components/MachineVisualizer';
+import { MachineVisualizer } from '../../../components/MachineVisualizer';
 import { actions, createMachine } from 'xstate';
-import { parseMachine } from '../../components/parseMachine';
+import { parseMachine } from '../../../components/parseMachine';
 import { GetServerSideProps } from 'next';
 const { Octokit } = require('@octokit/core');
 
