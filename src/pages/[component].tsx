@@ -3,15 +3,10 @@ import { createMachine } from 'xstate';
 import { GetServerSideProps } from 'next';
 import { parseMachine } from '../components/parseMachine';
 import { MachineVisualizer } from '../components/MachineVisualizer';
+import { visualizeMessage } from '../components/utils';
 
 function App(props: { machineSource: string }) {
   const machine = parseMachine(props.machineSource);
-  //   let machine;
-
-  //   if (!props.status.successful) {
-  //     machine = createMachine(machineSource);
-  //   } else machine = parseMachine(props.machineSource);
-
   return <MachineVisualizer machine={machine} />;
 }
 
@@ -30,15 +25,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const invalidComponent = fileContent === '404: Not Found';
 
   const machineSource = invalidComponent
-    ? `"use strict";
-
-    var _xstate = require("xstate");
-    
-    const {
-      actions, createMachine
-    } = _xstate;
-      const fetchMachine = createMachine({
-    id: "Machine not found"})`
+    ? visualizeMessage('Machine not found')
     : fileContent;
 
   return {

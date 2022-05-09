@@ -177,3 +177,15 @@ export function createInterpreterContext<
 
   return [Provider, useContext, createUseSelector] as const;
 }
+
+export const visualizeMessage = (message: string) => {
+  return `"use strict";
+
+var _xstate = require("xstate");
+
+const {
+  actions, createMachine
+} = _xstate;
+  const fetchMachine = createMachine({
+    id: "${message}"})`;
+};
