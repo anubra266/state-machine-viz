@@ -429,6 +429,7 @@ export const styles: CSSObject = {
   ...baseStyles,
   ...actionVizStyles,
   ...delayVizStyles,
+  ...invokeVizStyles,
   ...edgeVizStyles,
   ...eventTypeVizStyles,
   ...stateNodeVizStyles,

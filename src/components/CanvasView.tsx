@@ -103,7 +103,7 @@ export const CanvasView: React.FC = () => {
           aria-pressed={panModeEnabled}
           variant={panModeEnabled ? 'secondaryPressed' : 'secondary'}
         />
-        {/* {simulationMode === 'visualizing' && (
+        {simulationMode === 'visualizing' && (
           <Button
             size="sm"
             marginLeft={2}
@@ -112,7 +112,7 @@ export const CanvasView: React.FC = () => {
           >
             RESET
           </Button>
-        )} */}
+        )}
         <IconButton
           size="sm"
           isRound

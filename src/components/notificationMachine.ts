@@ -28,23 +28,23 @@ export const notifMachine = notifModel.createMachine({
         (_, e) => {
           const id = e.message;
           if (!toast.isActive(id)) {
-            // toast({
-            //   id,
-            //   status: e.status,
-            //   title: e.title || e.status?.toUpperCase(),
-            //   description: id,
-            //   isClosable: true,
-            //   position: 'bottom-left',
-            // });
             toast({
               id,
-              status: 'info',
-              title: 'Visualizer events',
-              description:
-                "Those dont't work for now, we're just aiming to show an overall picture of the machine.",
+              status: e.status,
+              title: e.title || e.status?.toUpperCase(),
+              description: id,
               isClosable: true,
-              position: 'top-left',
+              position: 'bottom-left',
             });
+            // toast({
+            //   id,
+            //   status: 'info',
+            //   title: 'Visualizer events',
+            //   description:
+            //     "Those dont't work for now, we're just aiming to show an overall picture of the machine.",
+            //   isClosable: true,
+            //   position: 'top-left',
+            // });
           }
         },
       ],

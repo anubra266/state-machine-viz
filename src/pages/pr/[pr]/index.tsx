@@ -195,7 +195,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
           return {
             ...comp,
             filename: compName,
-            git_url: machineFile?.blob_url,
+            git_url: machineFile?.blob_url || null,
           };
         });
       return machineOutputs;

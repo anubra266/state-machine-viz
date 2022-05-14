@@ -43,6 +43,8 @@ export const parseMachine = (source: string) => {
     exports: {},
     require: (sourcePath: string) => {
       switch (sourcePath) {
+        case 'console':
+          return console;
         case 'xstate':
           return {
             ...XState,

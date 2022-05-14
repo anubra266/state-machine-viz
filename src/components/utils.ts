@@ -8,6 +8,7 @@ import {
   Interpreter,
   SendAction,
   StateNode,
+  TransitionDefinition,
 } from 'xstate';
 
 const testPlatform = (re: RegExp): boolean =>
@@ -188,4 +189,48 @@ const {
 } = _xstate;
   const fetchMachine = createMachine({
     id: "${message}"})`;
+};
+
+type Action = string | string[];
+type Cond = string;
+type Target = string;
+type Transition = { actions?: Action; cond?: Cond; target?: Target };
+type Event = Transition | Transition[];
+
+export const COND_TYPES = {
+  ONE: 'one',
+  MANY: 'many',
+  BOOLEAN: 'boolean',
+  NONE: 'none',
+} as const;
+
+export const parseConditions = (definition: TransitionDefinition<any, any>) => {
+  const events = definition.source.config.on as Record<string, Event>;
+  const event = events[definition.eventType];
+
+  if (typeof event === 'string') {
+    return [COND_TYPES.NONE, null] as const;
+  } else if (Array.isArray(event)) {
+    const conds = event
+      .filter((cond) => 'cond' in cond)
+      .map((cond) => ({ cond: cond.cond, target: cond.target }));
+
+    if (event.length === 1) {
+      return [conds[0] ? COND_TYPES.ONE : COND_TYPES.NONE, conds[0]] as const;
+    } else if (event.length > 1) {
+      if (conds.length > 1) {
+        //pass event for cases where there's a default branch
+        return [COND_TYPES.MANY, event] as const;
+      } else if (conds.length === 1) {
+        return [COND_TYPES.BOOLEAN, conds[0]] as const;
+      }
+    }
+  } else if (event && 'cond' in event) {
+    return [
+      COND_TYPES.ONE,
+      { cond: event.cond, target: event.target },
+    ] as const;
+  }
+
+  return [COND_TYPES.NONE] as const;
 };
