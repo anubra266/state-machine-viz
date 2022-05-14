@@ -101,14 +101,16 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   );
 
-  const machines = machineOutputs.map((machine: Machine) => {
-    const name = machine.name.split('.')[0];
-    const git_url = `https://github.com/chakra-ui/zag/blob/main/packages/machines/${name}/src/${name}.machine.ts`;
-    return {
-      name,
-      git_url,
-    };
-  });
+  const machines = machineOutputs
+    .filter((mac: Machine) => !mac.name.includes('toast'))
+    .map((machine: Machine) => {
+      const name = machine.name.split('.')[0];
+      const git_url = `https://github.com/chakra-ui/zag/blob/main/packages/machines/${name}/src/${name}.machine.ts`;
+      return {
+        name,
+        git_url,
+      };
+    });
 
   return {
     props: { machines },

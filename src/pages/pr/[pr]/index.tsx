@@ -177,6 +177,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       const prFiles = response.data as Record<string, any>[];
       const machineOutputs = prFiles
         .filter((file) => file.filename.startsWith('.xstate/'))
+        .filter((mac) => !mac.filename.includes('toast'))
         .map((machine) => {
           const comp = pick(machine, [
             'additions',
