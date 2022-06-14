@@ -1,6 +1,6 @@
 # State machine visualizer 
 
-Visualize [XState](https://xstate.js.org) state machines and statecharts.
+Visualize [ZagJs](https://zagjs.com) components' state machines.
 
 ## Installation
 
