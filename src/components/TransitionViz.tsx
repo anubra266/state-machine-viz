@@ -7,10 +7,8 @@ import {
   PopoverContent,
   PopoverHeader,
   PopoverBody,
-  PopoverFooter,
   PopoverArrow,
   PopoverCloseButton,
-  PopoverAnchor,
   Portal,
   useDisclosure,
   ButtonGroup,
@@ -31,7 +29,6 @@ import { ActionViz } from './ActionViz';
 import { DelayViz } from './DelayViz';
 import { COND_TYPES, parseConditions } from './utils';
 import { useRef } from 'react';
-import { useState } from 'react';
 
 const getGuardType = (guard: Guard<any, any>) => {
   const guardName = guard.name.replace(
