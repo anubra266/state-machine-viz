@@ -1,7 +1,7 @@
 const baseConfig = {
   repo: 'https://github.com/chakra-ui/zag-docs',
-  title: 'Zag Vizualizer - Vizualize ZagJs components',
-  description: 'Vizualizer for ZagJs components',
+  title: 'Zag Visualizer - Visualize ZagJs components',
+  description: 'Visualizer for ZagJs components',
   url: 'https://vizualizer.zagjs.com',
   zag_url: 'https://zagjs.com',
 };
@@ -31,7 +31,7 @@ const siteConfig = {
   },
   seo: {
     title: baseConfig.title,
-    titleTemplate: '%s - Zag Vizualizer',
+    titleTemplate: '%s - Zag Visualizer',
     description: baseConfig.description,
     siteUrl: baseConfig.url,
     twitter: {
