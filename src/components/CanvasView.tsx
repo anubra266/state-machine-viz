@@ -14,11 +14,15 @@ import { toDirectedGraph } from './directedGraph';
 import { Graph } from './Graph';
 import { useSimulation, useSimulationMode } from './SimulationContext';
 import { CompressIcon, HandIcon } from './Icons';
+import { useRouter } from 'next/dist/client/router';
+import { FaGithub } from 'react-icons/fa';
 
 export const CanvasView: React.FC = () => {
   const [panModeEnabled, setPanModeEnabled] = React.useState(false);
   const simService = useSimulation();
   const canvasService = useCanvas();
+
+  const router = useRouter();
 
   const machine = useSelector(simService, (state) => {
     return state.context.currentSessionId
@@ -120,7 +124,21 @@ export const CanvasView: React.FC = () => {
           marginLeft="auto"
           variant="secondary"
           icon={<ArrowBackIcon boxSize="4" />}
-          onClick={() => history.back()}
+          onClick={() => router.push('/')}
+        />
+        <IconButton
+          size="sm"
+          isRound
+          ml="2"
+          aria-label="Edit Machine"
+          variant="secondary"
+          icon={<FaGithub />}
+          onClick={() =>
+            window.open(
+              'https://github.com/anubra266/state-machine-viz',
+              '_blank',
+            )
+          }
         />
       </Box>
     </Box>
