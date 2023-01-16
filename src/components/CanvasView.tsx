@@ -36,8 +36,6 @@ export const CanvasView: React.FC = () => {
     [machine],
   );
 
-  console.log('machine', machine);
-
   const shouldEnableZoomOutButton = useSelector(canvasService, (state) =>
     canZoomOut(state.context),
   );

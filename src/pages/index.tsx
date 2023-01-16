@@ -28,9 +28,26 @@ export const Index = (props: NextPage & IndexProps) => {
   return (
     <Stack py="10" px="20" overflow="auto" maxH="100vh">
       <div>
-        <Text fontSize="2xl" fontWeight="medium">
-          Zag JS Machines
-        </Text>
+        <Flex align="center">
+          <Text fontSize="2xl" fontWeight="medium">
+            Zag JS Machines
+          </Text>
+          <IconButton
+            size="sm"
+            isRound
+            ml="auto"
+            aria-label="Open Github Repo"
+            title="Open Github Repo"
+            variant="ghost"
+            icon={<FaGithub />}
+            onClick={() =>
+              window.open(
+                'https://github.com/anubra266/state-machine-viz',
+                '_blank',
+              )
+            }
+          />
+        </Flex>
         <Divider />
       </div>
       <SimpleGrid minChildWidth="250px" spacing="6" pt="8">
