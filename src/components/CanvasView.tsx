@@ -36,6 +36,8 @@ export const CanvasView: React.FC = () => {
     [machine],
   );
 
+  console.log('machine', machine);
+
   const shouldEnableZoomOutButton = useSelector(canvasService, (state) =>
     canZoomOut(state.context),
   );
@@ -126,20 +128,22 @@ export const CanvasView: React.FC = () => {
           icon={<ArrowBackIcon boxSize="4" />}
           onClick={() => router.push('/')}
         />
-        <IconButton
-          size="sm"
-          isRound
-          ml="2"
-          aria-label="Edit Machine"
-          variant="secondary"
-          icon={<FaGithub />}
-          onClick={() =>
-            window.open(
-              'https://github.com/anubra266/state-machine-viz',
-              '_blank',
-            )
-          }
-        />
+        {machine?.id && (
+          <IconButton
+            size="sm"
+            isRound
+            ml="2"
+            aria-label="Edit Machine"
+            variant="secondary"
+            icon={<FaGithub />}
+            onClick={() =>
+              window.open(
+                `https://github.com/chakra-ui/zag/blob/main/packages/machines/${machine.id}/src/${machine.id}.machine.ts`,
+                '_blank',
+              )
+            }
+          />
+        )}
       </Box>
     </Box>
   );
