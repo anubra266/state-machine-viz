@@ -26,7 +26,21 @@ const windowShim = {
   },
 };
 
-export const parseMachine = (source: string) => {
+const resolveConditionalInitial = (source: string) => {
+  const conditionalInitialStateRegex = /initial:(.*)\?(.*):(.*),/;
+  const isConditionalInitial = source.search(conditionalInitialStateRegex);
+  if (!isConditionalInitial) return source;
+
+  const defaultInitialState = source.match(conditionalInitialStateRegex)?.[3];
+  const newSource = source.replace(
+    conditionalInitialStateRegex,
+    `initial: ${defaultInitialState},`,
+  );
+  return newSource;
+};
+
+export const parseMachine = (sourceCode: string) => {
+  const source = resolveConditionalInitial(sourceCode);
   const machines: Array<XState.StateNode> = [];
 
   const createMachineCapturer =
