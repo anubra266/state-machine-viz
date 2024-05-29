@@ -23,7 +23,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const machineSource = invalidComponent
     ? visualizeMessage('Machine not found 😔')
-    : fileContent.replace('id,', `id: "${context.params?.component}",`);
+    : fileContent
+        .replace('id,', `id: "${context.params?.component}",`)
+        .replaceAll('0:', 'ZERO:');
 
   return {
     props: { machineSource },
