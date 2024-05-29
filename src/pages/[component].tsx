@@ -1,5 +1,4 @@
 import React from 'react';
-import { createMachine } from 'xstate';
 import { GetServerSideProps } from 'next';
 import { parseMachine } from '../components/parseMachine';
 import { MachineVisualizer } from '../components/MachineVisualizer';
@@ -24,7 +23,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const machineSource = invalidComponent
     ? visualizeMessage('Machine not found 😔')
-    : fileContent;
+    : fileContent.replace('id,', `id: "${componentName}",`);
 
   return {
     props: { machineSource },
